@@ -36,6 +36,7 @@ async function deleteByCondition(params) {
 async function updateByCondition(findParam, changeParam) {
   const person = await Person.find(...findParam);
   if (!person) return;
+  person.set({ ...changeParam });
 }
 const entree1 = {
   lastName: "ben lahmer",
