@@ -18,9 +18,24 @@ async function addPerson(param) {
   console.log(result);
 }
 
-async function getBooks() {
-  const books = await Book.find().sort({ date: -1 });
-  console.log(books);
+async function getContactList() {
+  const result = await Person.find();
+  console.log(result);
+}
+async function getbyId(id) {
+  const result = await Person.find({ id });
+  console.log(result);
+}
+async function getByCondition(params) {
+  const result = await Person.find({ ...params });
+  console.log(result);
+}
+async function deleteByCondition(params) {
+  await person.deleteMany({ ...params });
+}
+async function updateByCondition(findParam, changeParam) {
+  const person = await Person.find(...findParam);
+  if (!person) return;
 }
 const entree1 = {
   lastName: "ben lahmer",
@@ -42,8 +57,15 @@ const entree3 = {
 };
 const entree4 = { lastName: "ben yahia", firstName: "rym", age: 4 };
 const entree5 = { lastName: "cherif", firstName: "sami", age: 3 };
-addPerson(entree1);
-addPerson(entree2);
-addPerson(entree3);
-addPerson(entree4);
-addPerson(entree5);
+// addPerson(entree1);
+// addPerson(entree2);
+// addPerson(entree3);
+// addPerson(entree4);
+// addPerson(entree5);
+// getContactList();
+// getbyId();
+getByCondition({ age: { $gt: 18 } });
+
+getByCondition({ age: { $gt: 18 }, firstName: /.*rr.*/i });
+// deleteByCondition({ age:{ $lt: 5} });
+// getContactList();
