@@ -33,10 +33,12 @@ async function getByCondition(params) {
 async function deleteByCondition(params) {
   await person.deleteMany({ ...params });
 }
-async function updateByCondition(findParam, changeParam) {
-  const person = await Person.find(...findParam);
-  if (!person) return;
-  person.set({ ...changeParam });
+async function updateByCondition(query, changeParam) {
+  const person = await Person.update(
+    { ...query },
+    { $set: { ...changeParam } },
+    { multi: true }
+  );
 }
 const entree1 = {
   lastName: "ben lahmer",
